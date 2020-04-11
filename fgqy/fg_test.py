@@ -15,7 +15,7 @@ def the_current_time():
 # 图片风格迁移方法 style:迁移风格， content_image： 内容图片
 def  fg_run(style, X_image):
     model = 'saver_%s' % style
-    result_image = 'output/test_%s.jpg' % style
+    result_image = 'image_output/test_%s.jpg' % style
 
     sess = tf.Session()
     sess.run(tf.global_variables_initializer())
