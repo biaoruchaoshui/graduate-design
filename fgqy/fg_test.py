@@ -34,7 +34,7 @@ def  fg_run(style, X_image):
     imsave(result_image, gen_img)
     # 结束时间
     the_current_time()
-    return gen_img
+    return result_image
 
 
 
