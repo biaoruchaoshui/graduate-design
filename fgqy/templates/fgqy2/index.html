@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>风格迁移</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 style="color:blue">你好，请选择你的风格图片</h1>
+<div id="app">
+    <!--视图-->
+    <img :src="images[currentIndex].imgSrc" height="400" width="500" alt="" @click="imgHandler">
+    <br>
+    <button @click="prevHandler">上一张</button>
+    <button @click="nextHandler">下一张</button>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src='/static/vue.js'></script>
+<script>
+    let vm = new Vue({   // 声明变量  实例化一个对象vm(指的是vue的实例)
+        el:"#app",    //绑定根元素
+        data(){
+            return{
+                images:[  //数据
+                    {id:1,imgSrc:"/static/images/candy.jpg"},
+                    {id:2,imgSrc:"/static/images/cubist.jpg"},
+                    {id:3,imgSrc:"/static/images/mosaic.jpg"},
+                    {id:4,imgSrc:"/static/images/muse.jpg"},
+                    {id:5,imgSrc:"/static/images/rain.jpg"},
+                    {id:6,imgSrc:"/static/images/scream.jpg"},
+                    {id:7,imgSrc:"/static/images/shipwreck.jpg"},
+                    {id:8,imgSrc:"/static/images/starry.jpg"},
+                    {id:9,imgSrc:"/static/images/udnie.jpg"},
+                    {id:10,imgSrc:"/static/images/wave.jpg"},
+                ],
+                currentIndex:0 //一开始设置为 1
+            }
+        },
+        methods:{// 对象内容是js函数
+
+            nextHandler(e){
+                this.currentIndex++;
+                //更改图片地址
+                if (this.currentIndex == 10){ //js的if判断语句
+                    this.currentIndex = 0;
+                }
+            },
+
+            prevHandler(e) {
+                this.currentIndex--;
+                //更改图片地址
+                if (this.currentIndex == -1) { //js的if判断语句
+                    this.currentIndex = 10;
+                }
+            },
+
+            imgHandler(e){ //每一个事件都有一个event对象, 冒泡阻止默认事件学的
+                console.log(e.target);//当前目标对象 <img src="img/1.jpg" alt>
+                console.log(this); //实例化里面的对象this 指的都是当前实例化对象
+            }
+        },
+
+         created(){
+            // this的指向问题 ************* 能用箭头函数不用匿名函数
+             //匿名函数改成箭头函数 this代指vue
+            setInterval( ()=>{
+                console.log(this);//this是 vue 对象
+            },1000)//自动循环播放图片 1秒播放一次
+        },
+
+    })
+
+</script>
+
+<style>
+
+</style>
+
+</body>
+</html>
